@@ -98,15 +98,14 @@ void deleteContact(struct node* head, char* stringValue)
 void searchContact(struct node* head, char* stringValue)
 {
 	struct node * temp;
-
-	while(head != NULL){
-		if((strcmp(head->name, stringValue) == 0) || (strcmp(head->number, stringValue) == 0))
+	temp = head;
+	while(temp != NULL){
+		if((strcmp(temp->name, stringValue) == 0) || (strcmp(temp->number, stringValue) == 0))
 		{
-			printf("%d. name: %s\n number: %s\n", ++sl, root->name, root->number);
+			printf("name: %s\n number: %s\n", temp->name, temp->number);
 			return;
 		}
-		temp = head;
-		head = head->next;
+		temp = temp->next;
 	}
 	printf("\n Contact Details not found in Phone Directory\n");
 }
@@ -160,22 +159,32 @@ int main(){
 				}
 				printf("Please enter name or number:");
 				scanf("%999s", name);
-				deleteContact(head, name);
+				searchContact(head, name);
 				break;
 
 			case 4:
+				if(head == NULL) {
+					printf("\nlist is empty\n");
+					break;
+				}
+				printf("Please enter name or number:");
+				scanf("%999s", name);
+				deleteContact(head, name);
+				break;
+
+			case 5:
 				freeLinkedList(head);
 				head = NULL;
 				break;
 
-			case 5:
+			case 6:
 				freeLinkedList(head);
 				head = NULL;
 				printf("\nReturning from the linked list program\n");
 				return 1;
 
 			default:
-				printf("\nPlease enter 1-5\n");
+				printf("\nPlease enter 1-6\n");
 				break;
 
 		}
